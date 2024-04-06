@@ -48,8 +48,8 @@ public class Movie extends BaseEntity {
 
     @Override
     public String toString() {
-        return "Movie{" +
-                "title='" + title + '\'' +
+        return "Movie { " + "id: " + getId() +
+                ", title='" + title + '\'' +
                 ", year=" + year +
                 ", ticketPrice='" + ticketPrice + '\'' +
                 ", inCinema=" + inCinema +

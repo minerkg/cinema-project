@@ -12,6 +12,11 @@ public class Main {
         CinemaRepository<Movie> movieRepository = new CinemaRepositoryImpl<Movie>();
         MovieService movieService = new MovieService(movieRepository);
 
+        //Add Test Movies
+        movieService.add(new Movie(1, "Inception", 2010, "$10", true));
+        movieService.add(new Movie(2, "The Dark Knight", 2008, "$12", false));
+        movieService.add(new Movie(3, "Interstellar", 2014, "$11", true));
+
         AppConsole appConsole = new AppConsole(movieService);
 
         appConsole.runConsole();
