@@ -1,21 +1,19 @@
 package ro.ubb.cinema.service;
 
 import ro.ubb.cinema.domain.Movie;
-import ro.ubb.cinema.repository.MovieRepository;
-import ro.ubb.cinema.repository.MovieRepositoryImpl;
+import ro.ubb.cinema.repository.CinemaRepository;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class MovieService {
-    private MovieRepository movieRepository;
+    private CinemaRepository<Movie> cinemaRepository;
 
-    public MovieService(MovieRepository movieRepository) {
-        this.movieRepository = movieRepository;
+    public MovieService(CinemaRepository<Movie> cinemaRepository) {
+        this.cinemaRepository = cinemaRepository;
     }
 
     public List<Movie> getAllMovies() {
-        return movieRepository.findAll();
+        return cinemaRepository.findAll();
     }
 
     public void addMovie() {
