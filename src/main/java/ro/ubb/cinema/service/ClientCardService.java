@@ -1,6 +1,7 @@
 package ro.ubb.cinema.service;
 
 import ro.ubb.cinema.domain.ClientCard;
+import ro.ubb.cinema.domain.ClientCardValidator;
 import ro.ubb.cinema.repository.CinemaRepository;
 
 import java.util.List;
@@ -13,7 +14,7 @@ public class ClientCardService {
     }
 
     public void add(ClientCard clientCard) {
-        // TODO: Add validation
+        ClientCardValidator.validate(clientCard);
         clientCardRepository.save(clientCard);
     }
 
@@ -26,7 +27,7 @@ public class ClientCardService {
     }
 
     public void update(ClientCard newClientCard) {
-        // TODO: Add Validation
+        ClientCardValidator.validate(newClientCard);
         clientCardRepository.update(newClientCard);
     }
 

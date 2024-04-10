@@ -1,6 +1,7 @@
 package ro.ubb.cinema.service;
 
 import ro.ubb.cinema.domain.Reservation;
+import ro.ubb.cinema.domain.ReservationValidator;
 import ro.ubb.cinema.repository.CinemaRepository;
 
 import java.util.List;
@@ -13,7 +14,7 @@ public class ReservationService {
     }
 
     public void add(Reservation reservation) {
-        // TODO: Add validation
+        ReservationValidator.validate(reservation);
         reservationRepository.save(reservation);
     }
 
@@ -26,7 +27,7 @@ public class ReservationService {
     }
 
     public void update(Reservation newReservation) {
-        // TODO: Add Validation
+        ReservationValidator.validate(newReservation);
         reservationRepository.update(newReservation);
     }
 

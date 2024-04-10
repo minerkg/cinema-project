@@ -5,12 +5,12 @@ import java.time.LocalDate;
 public class ClientCard extends BaseEntity {
     private String firstName;
     private String lastName;
-    private int cnp;
+    private String cnp;
     private LocalDate birthDate;
     private LocalDate registeringDate;
     private int loyaltyPoints;
 
-    public ClientCard(int id, String firstName, String lastName, int cnp, LocalDate birthDate, LocalDate registeringDate, int loyaltyPoints) {
+    public ClientCard(int id, String firstName, String lastName, String cnp, LocalDate birthDate, LocalDate registeringDate, int loyaltyPoints) {
         super(id);
         this.firstName = firstName;
         this.lastName = lastName;
@@ -36,11 +36,11 @@ public class ClientCard extends BaseEntity {
         this.lastName = lastName;
     }
 
-    public int getCnp() {
+    public String getCnp() {
         return cnp;
     }
 
-    public void setCnp(int cnp) {
+    public void setCnp(String cnp) {
         this.cnp = cnp;
     }
 

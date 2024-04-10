@@ -1,6 +1,7 @@
 package ro.ubb.cinema.service;
 
 import ro.ubb.cinema.domain.Movie;
+import ro.ubb.cinema.domain.MovieValidator;
 import ro.ubb.cinema.repository.CinemaRepository;
 
 import java.util.List;
@@ -13,7 +14,7 @@ public class MovieService {
     }
 
     public void add(Movie movie) {
-        // TODO: Add validation
+        MovieValidator.validate(movie);
         movieRepository.save(movie);
     }
 
@@ -26,7 +27,7 @@ public class MovieService {
     }
 
     public void update(Movie newMovie) {
-        // TODO: Add Validation
+        MovieValidator.validate(newMovie);
         movieRepository.update(newMovie);
     }
 

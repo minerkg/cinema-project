@@ -9,6 +9,8 @@ import ro.ubb.cinema.service.ReservationService;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
 public class AppConsole {
@@ -38,7 +40,7 @@ public class AppConsole {
         System.out.print("Enter Year: ");
         int year = scanner.nextInt();
         System.out.print("Enter Ticket Price: ");
-        String ticketPrice = scanner.next();
+        double ticketPrice = scanner.nextDouble();
         System.out.print("Is it currently in cinema? (true/false): ");
         boolean inCinema = scanner.nextBoolean();
 
@@ -60,7 +62,7 @@ public class AppConsole {
 
         System.out.print("Ticket Price: " + currentMovie.getTicketPrice() + " or: ");
         String ticketPriceInput = scanner.nextLine();
-        String ticketPrice = !ticketPriceInput.isEmpty() ? ticketPriceInput : currentMovie.getTicketPrice();
+        double ticketPrice = !ticketPriceInput.isEmpty() ? Double.parseDouble(ticketPriceInput) : currentMovie.getTicketPrice();
 
         System.out.print("Is it currently in cinema? (" + currentMovie.isInCinema() + ") or: ");
         String inCinemaInput = scanner.nextLine();
@@ -77,7 +79,7 @@ public class AppConsole {
         System.out.println("Enter Last Name: ");
         String lastName = scanner.next();
         System.out.println("Enter CNP: ");
-        int cnp = scanner.nextInt();
+        String cnp = scanner.next();
         System.out.println("Enter Birth Date (yyyy-MM-dd): ");
         LocalDate birthDate = LocalDate.parse(scanner.next());
         System.out.println("Enter Registering Date (yyyy-MM-dd): ");
@@ -104,7 +106,7 @@ public class AppConsole {
 
         System.out.println("CNP: " + currentCard.getCnp() + " or: ");
         String cnpInput = scanner.nextLine();
-        int cnp = !cnpInput.isEmpty() ? Integer.parseInt(cnpInput) : currentCard.getCnp();
+        String cnp = !cnpInput.isEmpty() ? cnpInput : currentCard.getCnp();
 
         System.out.println("Birth Date (yyyy-MM-dd): " + currentCard.getBirthDate() + " or: ");
         String birthDateInput = scanner.nextLine();
@@ -199,10 +201,25 @@ public class AppConsole {
     }
 
     public void runConsole() {
-        while (true) {
-            displayMenu();
-            int choice = scanner.nextInt();
-            try {
+        try {
+            //Add Test Movies
+            movieService.add(new Movie(1, "Inception", 2010, 15, true));
+            movieService.add(new Movie(2, "The Dark Knight", 2008, 20, false));
+            movieService.add(new Movie(3, "Interstellar", 2014, 12, true));
+
+            // Add Test Client Cards
+            clientCardService.add(new ClientCard(1, "John", "Doe", "1234567890123", LocalDate.of(1990, 5, 15), LocalDate.now(), 1));
+            clientCardService.add(new ClientCard(2, "Jane", "Smith", "1234567890234", LocalDate.of(1985, 10, 25), LocalDate.now(), 0));
+            clientCardService.add(new ClientCard(3, "Alice", "Johnson", "1234567890345", LocalDate.of(1978, 3, 8), LocalDate.now(), 1));
+
+            // Add Test Reservations
+            reservationService.add(new Reservation(1, 1, 1, LocalDateTime.of(2024, 4, 10, 12, 30, 45)));
+            reservationService.add(new Reservation(2, 2, 2, LocalDateTime.of(2024, 4, 11, 11, 55, 33)));
+            reservationService.add(new Reservation(3, 3, 3, LocalDateTime.of(2024, 4, 12, 20, 45, 3)));
+
+            while (true) {
+                displayMenu();
+                int choice = scanner.nextInt();
                 switch (choice) {
                     case 1:
                         movieService.add(getMovieDetails());
@@ -246,9 +263,9 @@ public class AppConsole {
                     default:
                         System.out.println("Invalid choice. Please try again.");
                 }
-            } catch (RuntimeException re) {
-                System.out.println("Error: " + re.getMessage());
             }
+        } catch (RuntimeException re) {
+            System.out.println("Error: " + re.getMessage());
         }
     }
 }

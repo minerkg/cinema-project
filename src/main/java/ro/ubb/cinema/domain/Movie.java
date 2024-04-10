@@ -3,10 +3,10 @@ package ro.ubb.cinema.domain;
 public class Movie extends BaseEntity {
     private String title;
     private int year;
-    private String ticketPrice; // string pozitiv
+    private double ticketPrice;
     private boolean inCinema;
 
-    public Movie(int id, String title, int year, String ticketPrice, boolean inCinema) {
+    public Movie(int id, String title, int year, double ticketPrice, boolean inCinema) {
         super(id);
         this.title = title;
         this.year = year;
@@ -22,7 +22,7 @@ public class Movie extends BaseEntity {
         return year;
     }
 
-    public String getTicketPrice() {
+    public double getTicketPrice() {
         return ticketPrice;
     }
 
@@ -38,7 +38,7 @@ public class Movie extends BaseEntity {
         this.year = year;
     }
 
-    public void setTicketPrice(String ticketPrice) {
+    public void setTicketPrice(double ticketPrice) {
         this.ticketPrice = ticketPrice;
     }
 
