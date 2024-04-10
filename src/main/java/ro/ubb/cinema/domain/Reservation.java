@@ -1,15 +1,14 @@
 package ro.ubb.cinema.domain;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 public class Reservation extends BaseEntity {
-    // TODO: Clientul acumulează pe card 10% (parte întreagă) din prețul filmului. Se tipărește numărul total de puncte de pe card. Rezervarea se poate face doar dacă filmul este încă în program.
-
     private int filmId;
-    private int clientCardId; // poate fii null
-    private LocalDate dayAndTime;
+    private int clientCardId;
+    private LocalDateTime dayAndTime;
 
-    public Reservation(int id, int filmId, int clientCardId, LocalDate dayAndTime) {
+    public Reservation(int id, int filmId, int clientCardId, LocalDateTime dayAndTime) {
         super(id);
         this.filmId = filmId;
         this.clientCardId = clientCardId;
@@ -24,7 +23,7 @@ public class Reservation extends BaseEntity {
         return clientCardId;
     }
 
-    public LocalDate getDayAndTime() {
+    public LocalDateTime getDayAndTime() {
         return dayAndTime;
     }
 
@@ -36,7 +35,7 @@ public class Reservation extends BaseEntity {
         this.clientCardId = clientCardId;
     }
 
-    public void setDayAndTime(LocalDate dayAndTime) {
+    public void setDayAndTime(LocalDateTime dayAndTime) {
         this.dayAndTime = dayAndTime;
     }
 
