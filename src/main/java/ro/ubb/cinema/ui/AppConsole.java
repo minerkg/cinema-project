@@ -196,8 +196,51 @@ public class AppConsole {
         System.out.println("7. Add Reservation");
         System.out.println("8. Update Reservation");
         System.out.println("9. Delete Reservation");
+        System.out.println("10. Search Movies");
+        System.out.println("11. Search Clients");
         System.out.println("13. Show Cinema Details");
         System.out.print("Enter your choice: ");
+    }
+
+    public void searchMovies(String searchText) {
+        List<Movie> movies = movieService.getAll();
+        List<Movie> matchingMovies = new ArrayList<>();
+
+        for (Movie movie : movies) {
+            if (movie.getTitle().toLowerCase().contains(searchText.toLowerCase())) {
+                matchingMovies.add(movie);
+            }
+        }
+
+        if (matchingMovies.isEmpty()) {
+            System.out.println("No movies found matching the search criteria.");
+        } else {
+            System.out.println("Matching movies:");
+            for (Movie movie : matchingMovies) {
+                System.out.println(movie);
+            }
+        }
+    }
+
+    public void searchClients(String searchText) {
+        List<ClientCard> clients = clientCardService.getAll();
+        List<ClientCard> matchingClients = new ArrayList<>();
+
+        for (ClientCard client : clients) {
+            if (client.getFirstName().toLowerCase().contains(searchText.toLowerCase()) ||
+                    client.getLastName().toLowerCase().contains(searchText.toLowerCase())) {
+                matchingClients.add(client);
+            }
+        }
+
+        if (matchingClients.isEmpty()) {
+            System.out.println("No clients found matching the search criteria.");
+        } else {
+            System.out.println("Matching clients:");
+            for (ClientCard client : matchingClients) {
+                System.out.println(client);
+            }
+        }
     }
 
     public void runConsole() {
@@ -253,6 +296,14 @@ public class AppConsole {
                     case 9:
                         System.out.println("Enter Reservation ID: ");
                         reservationService.deleteById(scanner.nextInt());
+                        break;
+                    case 10:
+                        System.out.println("Enter movie name: ");
+                        searchMovies(scanner.next());
+                        break;
+                    case 11:
+                        System.out.println("Enter client name: ");
+                        searchClients(scanner.next());
                         break;
                     case 13:
                         showCinemaDetails();
