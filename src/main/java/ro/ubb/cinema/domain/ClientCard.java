@@ -77,6 +77,7 @@ public class ClientCard extends BaseEntity {
                 ", birthDate=" + birthDate +
                 ", registeringDate=" + registeringDate +
                 ", loyaltyPoints=" + loyaltyPoints +
-                '}';
+                '}' +
+                "\n";
     }
 }

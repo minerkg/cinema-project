@@ -10,6 +10,7 @@ import ro.ubb.cinema.service.ReservationService;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 import java.util.Scanner;
 
@@ -199,7 +200,9 @@ public class AppConsole {
         System.out.println("10. Search Movies");
         System.out.println("11. Search Clients");
         System.out.println("13. Show Cinema Details");
+        System.out.println("14. Show all client cards ordered by points (descending)");
         System.out.print("Enter your choice: ");
+
     }
 
     public void searchMovies(String searchText) {
@@ -254,6 +257,8 @@ public class AppConsole {
             clientCardService.add(new ClientCard(1, "John", "Doe", "1234567890123", LocalDate.of(1990, 5, 15), LocalDate.now(), 1));
             clientCardService.add(new ClientCard(2, "Jane", "Smith", "1234567890234", LocalDate.of(1985, 10, 25), LocalDate.now(), 0));
             clientCardService.add(new ClientCard(3, "Alice", "Johnson", "1234567890345", LocalDate.of(1978, 3, 8), LocalDate.now(), 1));
+            clientCardService.add(new ClientCard(4, "Nick", "Johnson", "1234567844375", LocalDate.of(1978, 3, 8), LocalDate.now(), 10));
+            clientCardService.add(new ClientCard(5, "Peter", "Johnson", "1234567844345", LocalDate.of(1978, 3, 8), LocalDate.now(), 100));
 
             // Add Test Reservations
             reservationService.add(new Reservation(1, 1, 1, LocalDateTime.of(2024, 4, 10, 12, 30, 45)));
@@ -307,6 +312,10 @@ public class AppConsole {
                         break;
                     case 13:
                         showCinemaDetails();
+                        break;
+                    case 14:
+                        //show client cards orderd by point
+                        System.out.println(clientCardService.getClientCardsByPoints());
                         break;
                     case 0:
                         System.out.println("Exiting...");
