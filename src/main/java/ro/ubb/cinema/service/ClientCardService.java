@@ -4,6 +4,7 @@ import ro.ubb.cinema.domain.ClientCard;
 import ro.ubb.cinema.domain.ClientCardValidator;
 import ro.ubb.cinema.repository.CinemaRepository;
 
+import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
 
@@ -34,6 +35,23 @@ public class ClientCardService {
 
     public void deleteById(int id) {
         clientCardRepository.deleteById(id);
+    }
+
+    public List<ClientCard> searchClients(String searchText) {
+        List<ClientCard> clients = clientCardRepository.findAll();
+        List<ClientCard> matchingClients = new ArrayList<>();
+
+        for (ClientCard client : clients) {
+            if (client.getFirstName().toLowerCase().contains(searchText.toLowerCase()) ||
+                    client.getLastName().toLowerCase().contains(searchText.toLowerCase())) {
+                matchingClients.add(client);
+            }
+        }
+
+        if (!matchingClients.isEmpty()) {
+            return matchingClients;
+        }
+        return null;
     }
 
     public List<ClientCard> getClientCardsByPoints() {
