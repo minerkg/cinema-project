@@ -201,6 +201,7 @@ public class AppConsole {
         System.out.println("11. Search Clients");
         System.out.println("13. Show Cinema Details");
         System.out.println("14. Show all client cards ordered by points (descending)");
+        System.out.println("15. Delete reservations between dates");
         System.out.print("Enter your choice: ");
 
     }
@@ -316,6 +317,15 @@ public class AppConsole {
                     case 14:
                         //show client cards orderd by point
                         System.out.println(clientCardService.getClientCardsByPoints());
+                        break;
+                    case 15:
+                        //delete all reservations between two dates
+                        System.out.println("Please enter the start date for reservation deletion: ");
+                        LocalDate start = LocalDate.parse(scanner.next());
+                        System.out.println("Please enter the end date for reservation deletion: ");
+                        LocalDate end = LocalDate.parse(scanner.next());
+                        System.out.println("You deleted the following reservation(s): ");
+                        System.out.println(reservationService.deleteReservationBetweenDays(start, end));;
                         break;
                     case 0:
                         System.out.println("Exiting...");
