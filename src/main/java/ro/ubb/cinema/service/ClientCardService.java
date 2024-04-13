@@ -4,9 +4,11 @@ import ro.ubb.cinema.domain.ClientCard;
 import ro.ubb.cinema.domain.ClientCardValidator;
 import ro.ubb.cinema.repository.CinemaRepository;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class ClientCardService {
     private CinemaRepository<ClientCard> clientCardRepository;
@@ -64,5 +66,12 @@ public class ClientCardService {
                     }
                 }).
                 toList();
+    }
+    public void addBonusToClients(LocalDate start, LocalDate end, int bonusPoints){
+        List<ClientCard> bonusList = getAll().stream().filter(client -> client.getBirthDate().isAfter(start) && client.getBirthDate().isBefore(end)).collect(Collectors.toList());
+        for (ClientCard clientCard : bonusList){
+            int bonusPoint = clientCard.getLoyaltyPoints();
+            clientCard.setLoyaltyPoints(bonusPoint+bonusPoints);
+        }
     }
 }
