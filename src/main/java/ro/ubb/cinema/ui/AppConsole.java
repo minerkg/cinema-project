@@ -4,6 +4,7 @@ import ro.ubb.cinema.domain.ClientCard;
 import ro.ubb.cinema.domain.Movie;
 import ro.ubb.cinema.domain.Reservation;
 import ro.ubb.cinema.service.ClientCardService;
+import ro.ubb.cinema.service.CnpException;
 import ro.ubb.cinema.service.MovieService;
 import ro.ubb.cinema.service.ReservationService;
 
@@ -225,6 +226,71 @@ public class AppConsole {
 
 
     public void runConsole() {
+            //Add Test Movies
+            movieService.add(new Movie(1, "Inception", 2010, 15, true));
+            movieService.add(new Movie(2, "The Dark Knight", 2008, 20, false));
+            movieService.add(new Movie(3, "Interstellar", 2014, 12, true));
+
+            // Add Test Client Cards
+            clientCardService.add(new ClientCard(1, "John", "Doe", "1234567890123", LocalDate.of(1990, 5, 15), LocalDate.now(), 1));
+            clientCardService.add(new ClientCard(2, "Jane", "Smith", "1234567890234", LocalDate.of(1985, 10, 25), LocalDate.now(), 0));
+            clientCardService.add(new ClientCard(3, "Alice", "Johnson", "1234567890345", LocalDate.of(1978, 3, 8), LocalDate.now(), 1));
+            clientCardService.add(new ClientCard(4, "Nick", "Johnson", "1234567844375", LocalDate.of(1978, 3, 8), LocalDate.now(), 10));
+            clientCardService.add(new ClientCard(5, "Peter", "Johnson", "1234567844345", LocalDate.of(1978, 3, 8), LocalDate.now(), 100));
+
+            // Add Test Reservations
+            reservationService.add(new Reservation(1, 1, 1, LocalDateTime.of(2024, 4, 10, 12, 30, 45)));
+            reservationService.add(new Reservation(2, 2, 2, LocalDateTime.of(2024, 4, 11, 11, 55, 33)));
+            reservationService.add(new Reservation(3, 3, 3, LocalDateTime.of(2024, 4, 12, 20, 45, 3)));
+
+            while (true) {
+                displayMenu();
+                int choice = scanner.nextInt();
+                switch (choice) {
+                    case 1:
+                        movieService.add(getMovieDetails());
+                        break;
+                    case 2:
+                        System.out.println("Enter Movie ID: ");
+                        movieService.update(getUpdatedMovieDetails(scanner.nextInt()));
+                        break;
+                    case 3:
+                        System.out.println("Enter Movie ID: ");
+                        movieService.deleteById(scanner.nextInt());
+                        break;
+                    case 4:
+                        try {
+                            clientCardService.add(getCardDetails());
+                        } catch (CnpException re) {
+                            System.out.println(re.getMessage());
+                            re.printStackTrace();
+                        }
+                        break;
+                    case 5:
+                        System.out.println("Enter Client Card ID: ");
+                        clientCardService.update(getUpdatedCardDetails(scanner.nextInt()));
+                        break;
+                    case 6:
+                        System.out.println("Enter Client Card ID: ");
+                        clientCardService.deleteById(scanner.nextInt());
+                        break;
+                    case 7:
+                        reservationService.add(getReservationDetails());
+                        break;
+                    case 8:
+                        System.out.println("Enter Reservation ID: ");
+                        reservationService.update(getUpdatedReservationDetails(scanner.nextInt()));
+                        break;
+                    case 9:
+                        System.out.println("Enter Reservation ID: ");
+                        reservationService.deleteById(scanner.nextInt());
+                        break;
+                    case 10:
+                        System.out.println("Enter movie name: ");
+                        System.out.println(movieService.searchMovies(scanner.next()));;
+                        break;
+                    case 11:
+                        System.out.println("Enter client name: ");
         while (true) {
             displayMenu();
             int choice = scanner.nextInt();
