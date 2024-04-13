@@ -4,6 +4,7 @@ import ro.ubb.cinema.domain.ClientCard;
 import ro.ubb.cinema.domain.Movie;
 import ro.ubb.cinema.domain.Reservation;
 import ro.ubb.cinema.service.ClientCardService;
+import ro.ubb.cinema.service.CnpException;
 import ro.ubb.cinema.service.MovieService;
 import ro.ubb.cinema.service.ReservationService;
 
@@ -243,7 +244,12 @@ public class AppConsole {
                         movieService.deleteById(scanner.nextInt());
                         break;
                     case 4:
-                        clientCardService.add(getCardDetails());
+                        try {
+                            clientCardService.add(getCardDetails());
+                        } catch (CnpException re) {
+                            System.out.println(re.getMessage());
+                            re.printStackTrace();
+                        }
                         break;
                     case 5:
                         System.out.println("Enter Client Card ID: ");

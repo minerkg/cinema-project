@@ -17,6 +17,10 @@ public class ClientCardService {
 
     public void add(ClientCard clientCard) {
         ClientCardValidator.validate(clientCard);
+        // here we check if the CNP is already exist or not
+        if (clientCardRepository.findAll().stream().filter(clientC -> clientC.getCnp().equals(clientCard.getCnp())).findFirst().isPresent()) {
+            throw new CnpException("CNP already exist");
+        }
         clientCardRepository.save(clientCard);
     }
 
